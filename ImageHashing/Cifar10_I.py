@@ -78,28 +78,28 @@ def main():
 
 
     train_transform = transforms.Compose([
-        transforms.Scale(224),
+        transforms.Resize((224,224)),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
 
     test_transform = transforms.Compose([
-        transforms.Scale(224),
+        transforms.Resize((224,224)),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
 
     # Dataset
-    train_dataset = dsets.CIFAR10(root='./data/Cifar/',
+    train_dataset = dsets.CIFAR10(root='/mnt/user/data/',
                                 train=True,
                                 transform=train_transform,
                                 download=True)
 
-    test_dataset = dsets.CIFAR10(root='./data/Cifar/',
+    test_dataset = dsets.CIFAR10(root='/mnt/user/data/',
                                 train=False,
                                 transform=test_transform)
 
-    database_dataset = dsets.CIFAR10(root='./data/Cifar/',
+    database_dataset = dsets.CIFAR10(root='/mnt/user/data/',
                                     train=False,
                                     transform=test_transform)
     
@@ -152,11 +152,11 @@ def main():
         first = False
 
         train_dataset.data = train_data
-        train_dataset.targets = train_L.astype(np.long)
+        train_dataset.targets = train_L.astype(np.longlong)
         test_dataset.data = test_data
-        test_dataset.targets =(test_L).astype(np.long)
+        test_dataset.targets =(test_L).astype(np.longlong)
         database_dataset.data = data_set
-        database_dataset.targets = (dataset_L).astype(np.long)
+        database_dataset.targets = (dataset_L).astype(np.longlong)
         
     # Data Loader
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
@@ -210,14 +210,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-              
-  
-        
-        
-
-        
-            
-            
-        
-        
-
