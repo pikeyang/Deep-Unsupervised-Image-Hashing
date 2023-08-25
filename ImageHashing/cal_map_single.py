@@ -94,6 +94,7 @@ def calculate_top_map(qB, rB, queryL, retrievalL, topk):
         tsum = np.sum(tgnd)
         if tsum == 0:
             continue
+        tsum = int(tsum)
         count = np.linspace(1, tsum, tsum)
 
         tindex = np.asarray(np.where(tgnd == 1)) + 1.0
